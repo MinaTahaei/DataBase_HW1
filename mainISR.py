@@ -56,28 +56,45 @@ def addPublisher(userInput):
 # def removePublisher (userInput):
 # def updatePublisher (userInput):
 
-
-print('(A)ddBook,(F)indBook,(R)emoveBook,(A)dd(P)ublisher')
+print('Press the required keys to use different parts of the program')
+print('(A)ddBook,(F)indBook,(R)emoveBook,(U)pdateBook,(A)dd(P)ublisher,(F)ind(P)ublisher,(R)emove(P)ublisher,(U)pdate(P)ublisher')
 Input = input()
 if (Input == 'A'):
     print('Enter the info of the book you want to add')
     userInput = input()
     addBook(userInput)
+
 if (Input == 'F'):
     print('Enter the info of the book you want to find')
     userInput = input()
     findBook(userInput)
+
 if (Input == 'R'):
     print('Enter the info of the book you want to remove')
     userInput = input()
     removeBook(userInput)
+
+if (Input == 'U'):
+    print('Enter the info of the book you want to update')
+    userInput = input()
+    updateBook(userInput)
+
 if (Input == 'AP'):
     print('Enter the info of the publisher you want to add')
     userInput = input()
     addPublisher(userInput)
 
+if (Input == 'FP'):
+    print('Enter the info of the publisher you want to find')
+    userInput = input()
+    findPublisher(userInput)
 
+if (Input == 'RP'):
+    print('Enter the info of the publisher you want to Remove')
+    userInput = input()
+    removePublisher(userInput)
 
-
-
-
+if (Input == 'UP'):
+    print('Enter the info of the publisher you want to Update')
+    userInput = input()
+    updatePublisher(userInput)
