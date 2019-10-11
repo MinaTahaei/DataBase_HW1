@@ -24,24 +24,37 @@ def findBook (userInput):
                 
              
 
- def removeBook (userInput):
-     Tmp3 = userInput.split(' ')
-     Tmp3[0] = Tmp3[0][12:]
-     with open ('books.txt', 'a+') as RM:
-         line = RM.readlines()
-         for lines in line:         
-             if(Tmp3[0] ==  )
+def removeBook (userInput):
+         Tmp3 = userInput.split(' ')
+         Tmp3[0] = Tmp3[0][12:]
+         with open ('books.txt', 'r+') as RM:
+             lines = RM.readlines()
+             for line in lines:         
+                 if(Tmp3[0] == line[0]):
+                    line.remove()
 
+              
         
 
 # def updateBook (userInput):
-# def addPublisher(userInput):
+
+def addPublisher(userInput):
+    Tmp = userInput.split(' , ')
+    Tmp[0] = Tmp[0][14:]
+    with open('Publisher.txt', 'a+') as RW:
+      numLines = sum(1 for line in open('Publisher.txt')) 
+      count = numLines - 1
+      RW.write(str(count) + '-')
+      for item in Tmp:
+         RW.write(item + '/ ')
+      RW.write('\n')
+
 # def findPublisher(userInput):
 # def removePublisher (userInput):
 # def updatePublisher (userInput):
 
 
-print('for adding books please press A and for Finding boks please press F')
+print('(A)ddBook,(F)indBook,(R)emoveBook,(A)dd(P)ublisher')
 Input = input()
 if (Input == 'A'):
     print('Enter the info of the book you want to add')
@@ -51,7 +64,14 @@ if (Input == 'F'):
     print('Enter the info of the book you want to find')
     userInput = input()
     findBook(userInput)
-    
+if (Input == 'R'):
+    print('Enter the info of the book you want to remove')
+    userInput = input()
+    removeBook(userInput)
+if (Input == 'AP'):
+    print('Enter the info of the publisher you want to add')
+    userInput = input()
+    addPublisher(userInput)
 
 
 
