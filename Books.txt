@@ -1,4 +1,2 @@
-
-
 1-ISBN:100/BookName:Computer Graphics/Authors:Hearn/Publisher:Araba/Subjects:CAD/PublishedYear:2002/PageNo:1500/ 
 2-ISBN:100/BookName:Computer Graphics/Authors:Hearn/Publisher:Araba/Subjects:CAD/PublishedYear:2002/PageNo:1500/ 
