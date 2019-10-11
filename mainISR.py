@@ -27,16 +27,19 @@ def findBook (userInput):
 def removeBook (userInput):
          Tmp3 = userInput.split(' ')
          Tmp3[0] = Tmp3[0][12:]
-         with open ('books.txt', 'r+') as RM:
+         with open ('books.txt', 'r') as RM:
              lines = RM.readlines()
              for line in lines:         
                  if(Tmp3[0] == line[0]):
-                    line.remove()
+                     RM.close()
+                     with open ('books.txt', 'w') as RM:
+                         for line in lines:
+                             if(line[0] != Tmp3[0]):
+                                 RW.write(line)
 
               
-        
-
 # def updateBook (userInput):
+
 
 def addPublisher(userInput):
     Tmp = userInput.split(' , ')
