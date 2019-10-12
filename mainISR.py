@@ -3,26 +3,27 @@ def addBook (userInput):
     Tmp[0] = Tmp[0][10:]
     with open('books.txt', 'a+') as RW:
       numLines = sum(1 for line in open('books.txt')) 
-      count = numLines - 1
+      count = numLines + 1
       RW.write(str(count) + '-')
       for item in Tmp:
          RW.write(item + '/ ')
-      RW.write('\n')
+
 
 def findBook (userInput):
     Tmp = userInput.split(' by ')
     Tmp[0] = Tmp[0][10:]
     # print(Tmp[0]):the real search part
     # print(Tmp[1]):the general search part
-    with open ('books.txt', 'a+') as RF:
-        line = RF.readlines()   
-        for lines in line:
+    with open ('books.txt', 'r') as RF:
+        lines = RF.readlines()  
+        for line in lines:
             Tmp2 = line.split('/')
-            Tmp2[0] = Tmp2[0][2:]
-            for i in range(0, 6):   
-                bmp[i] = Tmp2[i].split(':')
-                
-             
+            for Index in range(len(Tmp2)):
+                Tmp2[Index] = Tmp2[Index].split(":")
+            Tmp2[0][0] = Tmp2[0][0][2:]
+            for Item in Tmp2 :  
+                if Item[0] == Tmp[1] and Item[1] == Tmp[0]:            
+                    print(line)
 
 def removeBook (userInput):
          Tmp3 = userInput.split(' ')
@@ -45,7 +46,7 @@ def addPublisher(userInput):
     Tmp[0] = Tmp[0][14:]
     with open('Publisher.txt', 'a+') as RW:
       numLines = sum(1 for line in open('Publisher.txt')) 
-      count = numLines - 1
+      count = numLines + 1
       RW.write(str(count) + '-')
       for item in Tmp:
          RW.write(item + '/ ')
@@ -73,27 +74,23 @@ if (Input == 'R'):
     userInput = input()
     removeBook(userInput)
 
-if (Input == 'U'):
-    print('Enter the info of the book you want to update')
-    userInput = input()
-    updateBook(userInput)
 
 if (Input == 'AP'):
     print('Enter the info of the publisher you want to add')
     userInput = input()
     addPublisher(userInput)
 
-if (Input == 'FP'):
-    print('Enter the info of the publisher you want to find')
-    userInput = input()
-    findPublisher(userInput)
+# if (Input == 'FP'):
+#     print('Enter the info of the publisher you want to find')
+#     userInput = input()
+#     findPublisher(userInput)
 
-if (Input == 'RP'):
-    print('Enter the info of the publisher you want to Remove')
-    userInput = input()
-    removePublisher(userInput)
+# if (Input == 'RP'):
+#     print('Enter the info of the publisher you want to Remove')
+#     userInput = input()
+#     removePublisher(userInput)
 
-if (Input == 'UP'):
-    print('Enter the info of the publisher you want to Update')
-    userInput = input()
-    updatePublisher(userInput)
+# if (Input == 'UP'):
+#     print('Enter the info of the publisher you want to Update')
+#     userInput = input()
+#     updatePublisher(userInput)
