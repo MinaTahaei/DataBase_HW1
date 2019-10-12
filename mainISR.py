@@ -29,13 +29,12 @@ def removeBook (userInput):
          Tmp3[0] = Tmp3[0][12:]
          with open ('books.txt', 'r') as RM:
              lines = RM.readlines()
+         with open ('books.txt', 'w') as RM:
              for line in lines:         
                  if(Tmp3[0] == line[0]):
-                     RM.close()
-                     with open ('books.txt', 'w') as RM:
                          for line in lines:
                              if(line[0] != Tmp3[0]):
-                                 RW.write(line)
+                                 RM.write(line)
 
               
 # def updateBook (userInput):
