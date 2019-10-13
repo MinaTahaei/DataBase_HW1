@@ -1,1 +1,1 @@
-2-ISBN:10/ BookName:Circuits Theory/ Authors:M K/ Publisher: hgghg/ Subjects: Circuits/ 
+1-ISBN:10/ BookName:Circuits Theory/ Authors:M K/ Publisher: hgghg/ Subjects: Circuits/ 
