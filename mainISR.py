@@ -10,18 +10,18 @@ def addBook (ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO):
          for Book in BooksTemp:
             if Books.ISBN == ISBN:
                 return
-        BookTemp.append(newBook)
-        counter = len(BooksTemp)
-        info += str(counter) + "-"
-        atts1 = ["ISBN","BookName","Authors","Publisher","Subjects","PublishYear","PageNO"]
-        atts2 = [ISBN,BookName,Authors,Publisher,subjects,PublishYear,PageNO]
-
-        for i in range(7):
-            if i !=6:
-                info += atts1[i]+':'+str(atts2[i]) + '/'
-            else:
-                info += atts2[i]+':'+str(atts2[i])
-        with open('books.txt','a') as Writer:
+    BooksTemp.append(newBook)
+    counter = len(BooksTemp)
+    info += str(counter) + "-"
+    attsName = ["ISBN","BookName","Authors","Publisher","Subjects","PublishYear","PageNO"]
+    attsValues = [ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO]
+    info = ''
+    for i in range(7):
+         if i !=6:
+                info += attsName[i]+':'+str(attsValues[i]) + '/'
+         else:
+                info += attsName[i]+':'+str(attsValues[i])
+         with open('books.txt','a') as Writer:
             Writer.write(info + '\n')
 
 def readBooks ():
@@ -71,7 +71,7 @@ def updateBook(ISBN,SearchSpace,ValueToSpace):
                 BooksTemp[i].PageNO = ValueToSpace
              
 
-             with open('books.txt','r+') as Writer:
+            with open('books.txt','r+') as Writer:
                 lines = Writer.readlines()
                 changedValue =  lines[i]
                 dash_index = changedValue.index('-')
@@ -83,11 +83,11 @@ def updateBook(ISBN,SearchSpace,ValueToSpace):
                     if SearchSpace in Item :
                         Item[1] == ValueToSpace
                         break
-                Update = ""
-                Update += str(i) + "-"
+                Update = ''
+                Update += str(i) + '-'
                 for j in range(7):
                     if j != 6 :
-                        Update += TrueValue[i][0] +":" + TrueValue[i][1]+"/"
+                        Update += TrueValue[i][0] +":" + TrueValue[i][1]+ '/'
                     else:
                         Update += TrueValue[i][0] +":" + TrueValue[i][1]
                 
