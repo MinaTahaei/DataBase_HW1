@@ -1,3 +1,1 @@
-1-ISBN:1/BookName:newOne/Authors:Author1/Publisher:Pub1/Subjects:sub1/PublishYear:1234/PageNO:1
-2-ISBN:3/BookName:Name3/Authors:Author3/Publisher:Pub3/Subjects:sub3/PublishYear:1234/PageNO:3
-3-ISBN:4/BookName:Name4/Authors:Author4/Publisher:Pub4/Subjects:sub4/PublishYear:1234/PageNO:4
+1-ISBN:1/BookName:mina/Authors:bb/Publisher:Pub1/Subjects:sub1/PublishYear:1234/PageNO:1

@@ -6,24 +6,24 @@ PublishersTemp = []
 
 def addBook (ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO):
     if len(str(ISBN) )<= 20 and len(BookName) <= 200 and len(Authors) <= 200 and len(Publisher) <= 200 and len(Subjects) <=200 and len(str(PublishYear)) == 4 and len(str(PageNO)) < 5:
-         newBook = Books.Book(ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO)
-         for Book in BooksTemp:
+        newBook = Books.Book(ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO)
+        for Book in BooksTemp:
             if Book.ISBN == ISBN:
                 return
-    BooksTemp.append(newBook)
-    counter = len(BooksTemp)
-    info = ''
-    info += str(counter) + '-'
-    attsName = ['ISBN','BookName','Authors','Publisher','Subjects','PublishYear','PageNO']
-    attsValues = [ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO]
+        BooksTemp.append(newBook)
+        counter = len(BooksTemp)
+        info = ''
+        info += str(counter) + '-'
+        attsName = ['ISBN','BookName','Authors','Publisher','Subjects','PublishYear','PageNO']
+        attsValues = [ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO]
 
-    for i in range(7):
-        if i !=6:
-            info += attsName[i]+':'+str(attsValues[i]) + '/'
-        else:
-            info += attsName[i]+':'+str(attsValues[i])
-    with open('books.txt','a') as Writer:
-        Writer.write(info + '\n')
+        for i in range(7):
+            if i !=6:
+                info += attsName[i]+':'+str(attsValues[i]) + '/'
+            else:
+                info += attsName[i]+':'+str(attsValues[i])
+        with open('books.txt','a') as Writer:
+            Writer.write(info + '\n')
 
 def readBooks ():
     with open('books.txt','r') as RW:
@@ -53,12 +53,12 @@ def createBooks (dictionary):
     newBook = Books.Book(ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO)
     BooksTemp.append(newBook)
 
+
 def updateBook(ISBN,SearchSpace,ValueToSpace):
     notfind = 1
     for index in range(len(BooksTemp)):
         if BooksTemp[index].ISBN == int(ISBN) :
             notfind = 0
-            print("book find")
             if SearchSpace == "BookName" and len(ValueToSpace) <= 200:
                 BooksTemp[index].BookName = ValueToSpace
             elif SearchSpace == "Authors" and len(ValueToSpace) <= 200:
@@ -73,6 +73,7 @@ def updateBook(ISBN,SearchSpace,ValueToSpace):
                 BooksTemp[index].PageNO = int(ValueToSpace)
             changebookindex =  index
             break
+
     if not notfind:
         with open('books.txt','r') as reader:
             lines = reader.readlines()
@@ -137,10 +138,10 @@ def removeBook(ISBN):
                 changedValue =[]
                 with open('books.txt','r') as reader:
                     Bookinfo = reader.readlines()
-                for String in Bookinfo[bookIndex+1:]:
+                for String in Bookinfo[bookIndex + 1:]:
                     for j in range(len(String)):
                         if String[j] == '-':
-                            number = int(String[:j])-1
+                            number = int(String[:j]) - 1
                             UpdateString = str(number) + String[j:]
                             changedValue.append(UpdateString)
                             break
@@ -168,109 +169,113 @@ def readPublishers ():
         createPublishers(dictionary)
 
 def createPublishers(dictionary):
-        PubID = int(dictionary['PubId'])
-        PubName = dictionary['PubName']
-        SubjectInterest = dictionary['SubjectsInterest']
-        HeadName  = dictionary['HeadName']
-        PubAddress = dictionary['PubAddress']
-        newPublisher = Publishers.Publisher(PubID,PubName,SubjectInterest,HeadName,PubAddress)
-        PublishersTemp.append(newPublisher)
+    PubID = int(dictionary['PubID'])
+    PubName = dictionary['PubName']
+    SubjectsInterest = dictionary['SubjectsInterest']
+    HeadName  = dictionary['HeadName']
+    PubAddress = dictionary['PubAddress']
+    newPublisher = Publishers.Publisher(PubID,PubName,SubjectsInterest,HeadName,PubAddress)
+    PublishersTemp.append(newPublisher)
 
-def addPublisher(PubID,PubName,SubjectInterest,HeadName,PubAddress):
-        if len(str(PubID) ) == 6 and len(PubName) <= 200 and len(SubjectInterest) <= 200 and len(HeadName) <= 200 and len(PubAddress) <=200:
-            newPublisher = Publishers.Publisher(PubID,PubName,SubjectInterest,HeadName,PubAddress)
-        for Publisher in Publishers:
+def addPublisher(PubID,PubName,SubjectsInterest,HeadName,PubAddress):
+    if len(str(PubID) ) == 6 and len(PubName) <= 200 and len(SubjectsInterest) <= 200 and len(HeadName) <= 200 and len(PubAddress) <=200:
+        newPublisher = Publishers.Publisher(PubID,PubName,SubjectsInterest,HeadName,PubAddress)
+        for Publisher in PublishersTemp:
             if Publisher.PubID == PubID:
                 return
-        Publishers.append(newPublisher)
-        counter = len(Publishers)
+        PublishersTemp.append(newPublisher)
+        counter = len(PublishersTemp)
         info = ''
         info += str(counter) + '-'
-        attsName = ['PubID','PubName','SubjectInterest','HeadName','PubAddress']
-        attsValues = [PubID,PubName,SubjectInterest,HeadName,PubAddress]
+        attsName = ['PubID','PubName','SubjectsInterest','HeadName','PubAddress']
+        attsValues = [PubID,PubName,SubjectsInterest,HeadName,PubAddress]
 
-        for i in range(7):
-          if i !=6:
+        for i in range(5):
+          if i != 4:
             info += attsName[i]+':'+str(attsValues[i]) + '/'
           else:
             info += attsName[i]+':'+str(attsValues[i])
+        print(info)
         with open('Publisher.txt','a') as Writer:
             Writer.write(info + '\n')
 
 def updatePublisher(PubID,SearchSpace,ValueToSpace):
-     for i in range(len(Publishers)):
-        if (Publishers[i].ISBN == int(ISBN)):
-            if SearchSpace == 'BookName' and len(ValueToSpace) <=200:
-                Publishers[i].BookName = ValueToSpace
-            elif SearchSpace == 'Authors' and len(ValueToSpace) <=200:
-                Publishers[i].Authors = ValueToSpace
-            elif SearchSpace == 'Publisher' and len(ValueToSpace) <=200:
-                Publishers[i].Publisher = ValueToSpace
-            elif SearchSpace == 'Subjects' and len(ValueToSpace) <=200:
-                Publishers[i].Subjects = ValueToSpace
-            elif SearchSpace == 'PublishYear' and len(ValueToSpace) <=200:
-                Publishers[i].PublishYear = ValueToSpace
-            elif SearchSpace == 'PageNO' and len(ValueToSpace) <=200:
-                Publishers[i].PageNO = ValueToSpace
+    notfind = 1
+    for i in range(len(PublishersTemp)):
+        if (PublishersTemp[i].PubID == int(PubID)):
+            notfind = 0
+            if SearchSpace == 'PubName' and len(ValueToSpace) <=200:
+                PublishersTemp[i].PubName = ValueToSpace
+            elif SearchSpace == 'SubjectsInterest' and len(ValueToSpace) <=200:
+                PublishersTemp[i].SubjectsInterest = ValueToSpace
+            elif SearchSpace == 'HeadName' and len(ValueToSpace) <=200:
+                PublishersTemp[i].HeadName = ValueToSpace
+            elif SearchSpace == 'PubAddress' and len(ValueToSpace) <=200:
+                PublishersTemp[i].PubAddress = ValueToSpace
+            changepubindex =  i
+            break
+    if not notfind:
+        with open('Publisher.txt','r') as reader:
+            lines = reader.readlines()
+            update = lines[changepubindex]
+        for index1 in range(len(update)):
+            if update[index1] == '-':
+                trueUp = update[index1+1:]
+                break
+        turep = trueUp.split("/")
+        for index1 in range(len(turep)) :
 
+            key,value = turep[index1].split(':')
+            if key == SearchSpace :
+                value = ValueToSpace
+                turep[index1] = key + ':' + value
+                break
+        newupdate = ''
+        newupdate += str(changepubindex+1)
+        newupdate += "-"
+        for i in range(5):
+            if i != 4 :
+                newupdate += turep[i] +"/"
+            else:
+                newupdate += turep[i]
+        lines[changepubindex] = newupdate
+        with open('Publisher.txt','w') as writer:
+            for String in lines:
+                writer.write(String)
 
-            with open('Publisher.txt','r+') as Writer:
-                lines = Writer.readlines()
-                changedValue =  lines[i]
-                dash_index = changedValue.index('-')
-                TrueValue = changedValue[dash_index+1:]
-                TrueValue = TrueValue.split('/')
-                for i in range(len(TrueValue)):
-                    TrueValue[i] = TrueValue[i].split(':')
-                for data in TrueValue:
-                    if SearchSpace in data :
-                        data[1] == ValueToSpace
-                        break
-                Update = ''
-                Update += str(i) + '-'
-                for j in range(7):
-                    if j != 6 :
-                        Update += TrueValue[i][0] +':' + TrueValue[i][1]+ '/'
-                    else:
-                        Update += TrueValue[i][0] +':' + TrueValue[i][1]
-
-                lines[i] = Update
-
-                for String in lines:
-                    Writer.write(String)
 
 def DisplayPublisher(Publisher):
-    Att1 = [Publisher.PubID,Publisher.PubName,Publisher.SubjectInterest,Publisher.HeadName,Publisher.PubAddress]
-    Att2 = ['PubID','PubName','SubjectInterest','HeadName','PubAddress']
+    Att1 = [Publisher.PubID,Publisher.PubName,Publisher.SubjectsInterest,Publisher.HeadName,Publisher.PubAddress]
+    Att2 = ['PubID','PubName','SubjectsInterest','HeadName','PubAddress']
     info = ''
-    for i in range(7):
+    for i in range(5):
         info += Att2[i] +':' + str(Att1[i]) + '/'
     print(info)
 
 def findPublisher(SearchSpace,ValueToSpace):
     if SearchSpace == 'PubName':
-        for book in BooksTemp:
-            if publisher.PubName == ValueToSpace:
-                DisplayPub(publisher)
+        for publisher in PublishersTemp:
+            if ValueToSpace in publisher.PubName:
+                DisplayPublisher(publisher)
 
-def removePublisher(PubId):
-      for publisher in Publishers:
-         if publisher in Publishers:
+def removePublisher(PubID):
+    for publisher in PublishersTemp:
+        if publisher in PublishersTemp:
             if publisher.PubID == int(PubID):
-                PubIndex =Publishers.index(publisher)
-                Publishers.remove(publisher)
+                pubIndex =PublishersTemp.index(publisher)
+                PublishersTemp.remove(publisher)
                 changedValue =[]
                 with open('Publisher.txt','r') as reader:
-                    Publisherinfo = reader.readlines()
-                for String in Publisherinfo [PubIndex + 1:]:
+                    Pubinfo = reader.readlines()
+                for String in Pubinfo[pubIndex + 1:]:
                     for j in range(len(String)):
                         if String[j] == '-':
-                            number = int(String[:j])-1
-                            Update = str(number) + String[j:]
-                            changedValue.append(Update)
+                            number = int(String[:j]) - 1
+                            UpdateString = str(number) + String[j:]
+                            changedValue.append(UpdateString)
                             break
-                Pubinfo = Publisherinfo[:PubIndex] + changedValue
-                with open('Publishers.txt','w') as Writer:
+                Pubinfo = Pubinfo[:pubIndex] + changedValue
+                with open('Publisher.txt','w') as Writer:
                     for i in Pubinfo:
                         Writer.write(i)
 
@@ -286,26 +291,26 @@ def Main():
                 userInputInfo[i] = userInputInfo[i].split(':')
 
             for data in userInputInfo :
-                if data[0] == ' ISBN ':
-                    ISBN = int(data[1][1:len(data[1])-1])
+                if data[0] == ' ISBN':
+                    ISBN = int(data[1])
 
-                elif data[0] == ' BookName ' :
-                    BookName = data[1][1:len(data[1])-1]
+                elif data[0] == ' BookName' :
+                    BookName = data[1]
 
-                elif data[0] == ' Authors ' :
-                    Authors = data[1][1:len(data[1])-1]
+                elif data[0] == ' Authors' :
+                    Authors = data[1]
 
-                elif data[0] == ' Publisher ' :
-                    Publisher = data[1][1:len(data[1])-1]
+                elif data[0] == ' Publisher' :
+                    Publisher = data[1]
 
-                elif data[0] == ' Subjects ' :
-                    Subjects = data[1][1:len(data[1])-1]
+                elif data[0] == ' Subjects' :
+                    Subjects = data[1]
 
-                elif data[0] == ' PublishYear ':
-                    PublishYear = int(data[1][1:len(data[1])-1])
+                elif data[0] == ' PublishYear':
+                    PublishYear = int(data[1])
 
-                elif data[0] == ' PageNO ':
-                    PageNO = int(data[1][1:len(data[1])-1])
+                elif data[0] == ' PageNO':
+                    PageNO = int(data[1])
 
             addBook(ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO)
 
@@ -320,34 +325,38 @@ def Main():
             ISBN =userInput[2]
             ValueToSpace = userInput[4]
             SearchSpace = userInput[6]
-            updateBook(ISBN,SearchSpace,ValueToSpace)
+
+            updateBook(ISBN,ValueToSpace,SearchSpace)
 
         elif userInput[0:11] == 'remove book':
             ISBN = userInput.split(' ')[-1]
             removeBook(ISBN)
 
-        elif userInput[0:13]:
-            userInputInfo = userInput[13:]
+        elif userInput[0:13] == 'add publisher':
+            userInputInfo = userInput [13:]
             userInputInfo = userInputInfo.split(',')
-            for data in userInputInfo:
-                if data[0] == 'PubId':
-                    PubId = int(data[1][1:len(data[1])-1])
+            for i in range(len(userInputInfo)):
+                userInputInfo[i] = userInputInfo[i].split(':')
 
-                elif data[0] == 'PubName' :
-                    PubName = data[1][1:len(data[1])-1]
+            for data in userInputInfo :
+                if data[0] == ' PubID':
+                    PubID = int(data[1])
 
-                elif data[0] == 'SubjectInterest' :
-                    SubjectInterest = data[1][1:len(data[1])-1]
+                elif data[0] == ' PubName' :
+                    PubName = data[1]
 
-                elif data[0] == 'HeadName' :
-                    HeadName = data[1][1:len(data[1])-1]
+                elif data[0] == ' SubjectsInterest' :
+                    SubjectsInterest = data[1]
 
-                elif data[0] == 'PubAddress' :
-                    PubAddress = data[1][1:len(data[1])-1]
+                elif data[0] == ' HeadName' :
+                    HeadName = data[1]
 
-            addPublisher(PubId,PubName,SubjectInterest,HeadName,PubAddress)
+                elif data[0] == ' PubAddress' :
+                    PubAddress = data[1]
 
-        elif userInput[0:16] == 'update Publisher':
+            addPublisher(PubID,PubName,SubjectsInterest,HeadName,PubAddress)
+
+        elif userInput[0:16] == 'update publisher':
                 userInput = userInput.split(' ')
                 PubId =userInput[2]
                 ValueToSpace = userInput[4]
@@ -356,13 +365,12 @@ def Main():
 
         elif userInput[0:14] == 'find publisher':
                 userInput = userInput.split(' ')
-                Value = userInput[2]
-                findPublisher(Value)
+                SearchSpace = userInput[-1]
+                ValueToSpace = userInput[2]
+                findPublisher(SearchSpace,ValueToSpace)
 
         elif userInput[0:16] == 'remove publisher':
-            PubId = userInput.split(' ')[-1]
-            removePublisher(PubId)
+            PubID = userInput.split(' ')[-1]
+            removePublisher(PubID)
 
-
-readBooks()
-removeBook("2")
+Main()
