@@ -52,6 +52,18 @@ def addBook (ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO):
                     newInfo = BookName + ' ' + str(newIndex)
                     writer.write(newInfo + '\n')
 
+            #Authors index
+            with open('BookAuthorIndex.txt' , 'r') as reader:
+                lines = reader.readlines()
+                indexBookAuthor = 0
+                for info in lines:
+                    if Authors == info.split(' ')[0]:
+                        indexBookAuthor = 1
+                        break
+                if indexBookName == 0:
+                    with open('BookAuthorIndex.txt' , 'a') as writer:
+                        newInfo = Authors + ' ' + str(newIndex)
+                        writer.write(newInfo + '\n')
 
 def readBooks ():
     with open('books.txt','r') as RW:
@@ -107,6 +119,18 @@ def createBooks (dictionary):
             with open('BookTitleIndex.txt' , 'a') as writer:
                 newInfo = BookName + ' ' + str(newIndex)
                 writer.write(newInfo + '\n')
+    #Authors index
+    with open('BookAuthorIndex.txt' , 'r') as reader:
+        lines = reader.readlines()
+        indexBookAuthor = 0
+        for info in lines:
+            if Authors == info.split(' ')[0]:
+                indexBookAuthor = 1
+                break
+            if indexBookName == 0:
+                with open('BookAuthorIndex.txt' , 'a') as writer:
+                    newInfo = Authors + ' ' + str(newIndex)
+                    writer.write(newInfo + '\n')
 
 def updateBook(ISBN,SearchSpace,ValueToSpace):
     notfind = 1
@@ -187,7 +211,7 @@ def removeBook(ISBN):
     for book in BooksTemp:
         if book in BooksTemp:
             if book.ISBN == int(ISBN):
-                bookIndex =BooksTemp.index(book)
+                bookIndex = BooksTemp.index(book)
                 BooksTemp.remove(book)
                 changedValue =[]
                 with open('books.txt','r') as reader:
@@ -203,6 +227,53 @@ def removeBook(ISBN):
                 with open('books.txt','w') as Writer:
                     for i in Bookinfo:
                         Writer.write(i)
+
+        #ISBN index
+        newIndex = len(BooksTemp) - 1
+        with open('BookISBNIndex.txt','r') as reader:
+            lines  = reader.readlines()
+            indexISBN = 0
+            for info in lines:
+                if str(ISBN) == info.split(' ')[0]:
+                    indexISBN = 1
+                    break
+        if indexISBN == 0:
+            with open('BookISBNIndex.txt', 'a') as writer:
+                removeIndex = BooksTemp.index(book)
+                BooksTemp.remove(book)
+                newInfo = str(removeIndex) + ' ' + str(newIndex - 1)
+                writer.write(newInfo + '\n')
+
+           #BookName index
+        with open('BookTitleIndex.txt' , 'r') as reader:
+               lines = reader.readlines()
+               indexBookName = 0
+               for info in lines:
+                   if BookName == info.split(' ')[0]:
+                       indexBookName = 1
+                       break
+               if indexBookName == 0:
+                   with open('BookTitleIndex.txt' , 'a') as writer:
+                       removeIndex = BooksTemp.index(book)
+                       BooksTemp.remove(book)
+                       newInfo = str(removeIndex) + ' ' + str(newIndex - 1)
+                       writer.write(newInfo + '\n')
+
+            #Author Index
+        with open('BookAuthorIndex.txt' , 'r') as reader:
+                   lines = reader.readlines()
+                   indexBookAuthor = 0
+                   for info in lines:
+                       if Authors == info.split(' ')[0]:
+                           indexBookAuthor = 1
+                           break
+                   if indexBookName == 0:
+                       with open('BookAuthorIndex.txt' , 'a') as writer:
+                           removeIndex = BooksTemp.index(book)
+                           BooksTemp.remove(book)
+                           newInfo = str(removeIndex) + ' ' + str(newIndex - 1)
+                           writer.write(newInfo + '\n')
+
 
 def readPublishers ():
     with open('Publisher.txt','r') as RW:
