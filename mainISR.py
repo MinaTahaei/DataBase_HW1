@@ -25,6 +25,34 @@ def addBook (ISBN,BookName,Authors,Publisher,Subjects,PublishYear,PageNO):
         with open('books.txt','a') as Writer:
             Writer.write(info + '\n')
 
+        #ISBN index
+        newIndex = len(BooksTemp) - 1
+        with open('BookISBNIndex.txt','r') as reader:
+            lines  = reader.readlines()
+            indexISBN = 0
+            for info in lines:
+                if str(ISBN) == info.split(' ')[0]:
+                    indexISBN = 1
+                    break
+        if indexISBN == 0:
+            with open('BookISBNIndex.txt', 'a') as writer:
+                newInfo = str(ISBN) + ' ' + str(newIndex)
+                writer.write(newInfo + '\n')
+
+        #BookName index
+        with open('BookTitleIndex.txt' , 'r') as reader:
+            lines = reader.readlines()
+            indexBookName = 0
+            for info in lines:
+                if BookName == info.split(' ')[0]:
+                    indexBookName = 1
+                    break
+            if indexBookName == 0:
+                with open('BookTitleIndex.txt' , 'a') as writer:
+                    newInfo = BookName + ' ' + str(newIndex)
+                    writer.write(newInfo + '\n')
+
+
 def readBooks ():
     with open('books.txt','r') as RW:
        lines = RW.readlines()
@@ -67,7 +95,7 @@ def createBooks (dictionary):
             newInfo = str(ISBN) + ' ' + str(newIndex)
             writer.write(newInfo + '\n')
 
-    #BookName
+    #BookName index
     with open('BookTitleIndex.txt' , 'r') as reader:
         lines = reader.readlines()
         indexBookName = 0
